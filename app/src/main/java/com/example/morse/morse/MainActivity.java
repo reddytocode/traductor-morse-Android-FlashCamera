@@ -5,6 +5,7 @@ import android.graphics.Camera;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -125,12 +126,16 @@ public class MainActivity extends AppCompatActivity {
                     else outMorse += map.get(in.charAt(i));
                 }
 
-                out.setText(outMorse);
-
+                //out.setText(outMorse);
                 for(int i = 0; i < outMorse.length(); i++) {
                     if(outMorse.charAt(i) == '.') {
-                        lantern.alwaysOnDisplay(true).fullBrightDisplay(true).enableTorchMode(true).pulse(true).withDelay(1,TimeUnit.SECONDS);
-
+                        lantern.alwaysOnDisplay(true).fullBrightDisplay(true).enableTorchMode(true).pulse(false);
+                        Log.e("flash", ".");
+                        try {
+                            TimeUnit.MILLISECONDS.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         lantern.alwaysOnDisplay(false).fullBrightDisplay(false).enableTorchMode(false).pulse(false);
                     }else if(outMorse.charAt(i)=='_'){
                         try {
@@ -138,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+                        Log.e("flash", "_");
                         lantern.alwaysOnDisplay(false).fullBrightDisplay(false).enableTorchMode(false).pulse(false);
                     }else{
                         try {
@@ -158,5 +164,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        lantern.cleanup();
+        super.onDestroy();
     }
 }
