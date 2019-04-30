@@ -27,7 +27,7 @@ import github.nisrulz.lantern.Lantern;
 public class MainActivity extends AppCompatActivity {
 
     private EditText input;
-    private Button convert;
+    private Button convert, stop, flash;
     private TextView out;
     Map <Character, String> map = new HashMap<Character, String>();
     private Camera cam;
@@ -115,18 +115,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        convert.setOnClickListener(new View.OnClickListener() {
+
+        flash = (Button)findViewById(R.id.flash);
+        flash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String in = input.getText().toString();
-                String outMorse = "";
-                for(int i  =0; i < in.length(); i++){
-                    if(in.charAt(i) == ' ') outMorse+=" ";
-                    else outMorse += map.get(in.charAt(i));
-                }
-
-                //out.setText(outMorse);
+                String outMorse = out.getText().toString();
                 for(int i = 0; i < outMorse.length(); i++) {
                     if(outMorse.charAt(i) == '.') {
                         lantern.alwaysOnDisplay(true).fullBrightDisplay(true).enableTorchMode(true).pulse(false);
@@ -154,13 +149,22 @@ public class MainActivity extends AppCompatActivity {
                         lantern.alwaysOnDisplay(false).fullBrightDisplay(false).enableTorchMode(false).pulse(false);
                     }
                 }
+            }
+        });
 
+        convert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                String in = input.getText().toString();
+                String outMorse = "";
+                for(int i  =0; i < in.length(); i++){
+                    if(in.charAt(i) == ' ') outMorse+=" ";
+                    else outMorse += map.get(in.charAt(i));
+                }
 
-                /*
-                if(getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)){
-                    cam = Camera. .open();
-                }*/
+                out.setText(outMorse);
+
             }
         });
 

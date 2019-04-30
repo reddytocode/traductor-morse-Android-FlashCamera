@@ -40,18 +40,43 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:gravity="center"
         android:layout_gravity="center"
         android:id="@+id/out"
         android:textSize="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <Button
-        android:background="@color/colorPrimary"
-        android:layout_gravity="center"
-        android:id="@+id/convert"
-        android:text="Traducir"
+
+    <LinearLayout
+        android:layout_marginTop="35dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
+                <Button
+                    android:background="@color/colorPrimary"
+                    android:layout_gravity="center"
+                    android:id="@+id/convert"
+                    android:text="Traducir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"/>
+                <Button
+                    android:layout_marginLeft="15dp"
+                    android:textColor="#fff"
+                    android:background="@color/colorAccent"
+                    android:layout_gravity="center"
+                    android:id="@+id/flash"
+                    android:text="Flash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+    </LinearLayout>
+
+
 
         </LinearLayout>
     </ScrollView>
